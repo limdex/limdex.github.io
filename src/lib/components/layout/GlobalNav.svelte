@@ -10,7 +10,7 @@
   ];
 
   function isActive(href: string) {
-    if (href === '/work') return page.url.pathname === '/work' || page.url.pathname === '/work/';
+    if (href === '/work') return page.url.pathname === '/work/' || page.url.pathname.startsWith('/work/');
     return false;
   }
 </script>
