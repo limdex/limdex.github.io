@@ -1,0 +1,156 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------
+   Tailwind v4 design tokens — dark-photo single mode.
+   Ink is white-based; glass is dark-tinted for the NYC backdrop.
+   --------------------------------------------------------------- */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+               'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Neutral palette */
+  --color-canvas: #0a0a0c;
+  --color-surface: #141416;
+  --color-surface-elevated: #1c1c1e;
+  --color-ink: #f5f5f7;
+  --color-ink-muted: #a1a1a6;
+  --color-ink-faint: #6e6e73;
+  --color-border: #2a2a2d;
+
+  /* Accents */
+  --color-accent: #2997ff;
+  --color-accent-hover: #47a3ff;
+  --color-accent-soft: rgba(41, 151, 255, 0.14);
+  --color-fuchsia: #ff375f;
+  --color-amber: #ff9500;
+  --color-emerald: #30d158;
+  --color-teal: #30b0c7;
+
+  /* Elevation */
+  --shadow-tile: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-tile-hover: 0 18px 44px rgba(0, 0, 0, 0.7);
+  --shadow-nav: 0 1px 0 rgba(0, 0, 0, 0.3);
+
+  /* Radii */
+  --radius-tile: 20px;
+  --radius-pill: 980px;
+
+  /* Motion */
+  --ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-flyout: 240ms;
+
+  /* Container */
+  --container-page: 1120px;
+}
+
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
+/* ---------------------------------------------------------------
+   Glass material — dark-tinted for dark photo background.
+   White text reads on dark glass; specular border adds depth.
+   --------------------------------------------------------------- */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-blur: saturate(200%) blur(48px);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-specular: rgba(255, 255, 255, 0.82);
+  --glass-shadow: 0 4px 32px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --glass-shadow-hover: 0 18px 48px rgba(0, 0, 0, 0.13), 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------------------------------------------------------------
+   Baseline
+   --------------------------------------------------------------- */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+}
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  letter-spacing: -0.022em;
+  line-height: 1.47;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection { background: var(--color-accent); color: white; }
+
+/* ---------------------------------------------------------------
+   Utility classes
+   --------------------------------------------------------------- */
+@utility text-display {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+@utility text-gradient-accent {
+  background: linear-gradient(135deg, var(--color-ink) 0%, var(--color-accent) 60%, var(--color-fuchsia) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Nav glass */
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+/* Card glass — full surface with specular top highlight */
+@utility glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-specular), var(--glass-shadow);
+  &:hover {
+    box-shadow: inset 0 1px 0 var(--glass-specular), var(--glass-shadow-hover);
+  }
+}
+
+/* Button glass */
+@utility glass-btn {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 0.5px 0 var(--glass-specular);
+}
+
+/* Tinted glass — primary CTA */
+@utility glass-btn-accent {
+  background: color-mix(in srgb, var(--color-accent) 70%, transparent);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    0 4px 20px color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+/* Glass pill — accent-tinted badge */
+@utility glass-tag-accent {
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, rgba(255, 255, 255, 0.1));
+  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Glass pill — fuchsia-tinted badge */
+@utility glass-tag-warm {
+  background: color-mix(in srgb, var(--color-fuchsia) 18%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid color-mix(in srgb, var(--color-fuchsia) 32%, rgba(255, 255, 255, 0.1));
+  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+}

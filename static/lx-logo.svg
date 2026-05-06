@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-label="LX">
+  <rect width="40" height="40" rx="9" fill="#0071e3"/>
+  <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif"
+        font-size="18" font-weight="700" fill="#fff" letter-spacing="-0.02em">LX</text>
+</svg>

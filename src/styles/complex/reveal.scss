@@ -1,0 +1,28 @@
+// reveal.scss — scroll-in animation primitive used by <Reveal>.
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transition:
+    opacity 600ms var(--ease-apple),
+    transform 600ms var(--ease-spring);
+
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // Stagger children with a CSS variable set inline
+  &[data-delay] { transition-delay: calc(var(--reveal-delay, 0) * 80ms); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}

@@ -1,0 +1,19 @@
+// globalnav.scss — Minimal vertical text nav. No background. Fixed left, centered vertically.
+
+.globalnav {
+  position: fixed;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  z-index: 50;
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}

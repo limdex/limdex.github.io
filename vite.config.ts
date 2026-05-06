@@ -1,6 +1,11 @@
-import { defineConfig } from 'vite'
-import solid from 'vite-plugin-solid'
+import { sveltekit } from '@sveltejs/kit/vite';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [solid()],
-})
+  plugins: [tailwindcss(), sveltekit()],
+  server: {
+    port: 5173,
+    strictPort: false
+  }
+});
