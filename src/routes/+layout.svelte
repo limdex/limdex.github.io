@@ -8,6 +8,7 @@
   import '$styles/complex/reveal.scss';
   import GlobalNav from '$components/layout/GlobalNav.svelte';
   import Footer from '$components/layout/Footer.svelte';
+  import Splash from '$components/effects/Splash.svelte';
 
   let { children } = $props();
 
@@ -45,6 +46,8 @@
     };
   });
 </script>
+
+<Splash />
 
 <!-- Fixed full-viewport photo background -->
 <div class="page-bg" aria-hidden="true"></div>
