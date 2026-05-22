@@ -1,8 +1,0 @@
-// page-bg.scss — Fixed full-viewport photo background. Glass surfaces sit in front.
-
-.page-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: url('/bg.jpg') center / cover no-repeat;
-}

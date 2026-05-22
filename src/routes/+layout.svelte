@@ -2,8 +2,6 @@
   import { onMount } from 'svelte';
   import Lenis from 'lenis';
   import '$styles/app.css';
-  import '$styles/complex/page-bg.scss';
-  import '$styles/complex/hero.scss';
   import '$styles/complex/globalnav.scss';
   import '$styles/complex/reveal.scss';
   import GlobalNav from '$components/layout/GlobalNav.svelte';
@@ -11,6 +9,8 @@
   import Splash from '$components/effects/Splash.svelte';
 
   let { children } = $props();
+
+  let contentReady = $state(false);
 
   onMount(() => {
     const lenis = new Lenis({
@@ -23,11 +23,16 @@
       if (!anchor) return;
       const href = anchor.getAttribute('href') ?? '';
       const hash = href.includes('#') ? '#' + href.split('#').pop() : '';
-      if (!hash) return;
-      const el = document.querySelector(hash);
+      if (!hash || hash === '#') return;
+      const el = document.querySelector(hash) as HTMLElement | null;
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el as HTMLElement);
+      const nav = document.querySelector('.globalnav') as HTMLElement | null;
+      const navHeight = nav ? nav.offsetHeight : 0;
+      // Compute absolute target Y from the document, then subtract sticky nav.
+      // Passing a number (not the element) avoids Lenis adding its own offset twice.
+      const absY = el.getBoundingClientRect().top + window.scrollY;
+      lenis.scrollTo(absY - navHeight - 8, { immediate: false });
     }
 
     document.addEventListener('click', handleAnchorClick);
@@ -47,15 +52,14 @@
   });
 </script>
 
-<Splash />
+<Splash onReady={() => contentReady = true} />
 
-<!-- Fixed full-viewport photo background -->
-<div class="page-bg" aria-hidden="true"></div>
+<div style="opacity: {contentReady ? 1 : 0}; transition: opacity 120ms linear" class="min-h-screen flex flex-col">
+  <GlobalNav />
 
-<GlobalNav />
+  <main class="relative flex-1 w-full mx-auto max-w-[var(--container-page)] px-6 md:px-8">
+    {#if children}{@render children()}{/if}
+  </main>
 
-<main class="relative min-h-screen">
-  {#if children}{@render children()}{/if}
-</main>
-
-<Footer />
+  <Footer />
+</div>

@@ -12,8 +12,10 @@
   <meta name="description" content="Portfolio of {profile.name} — selected work, projects, and contact." />
 </svelte:head>
 
-<Hero />
-<About />
-<Work />
-<Highlights />
-<Contact />
+<div class="flex flex-col gap-24 md:gap-32 py-12 md:py-20">
+  <Hero />
+  <About />
+  <Work />
+  <Highlights />
+  <Contact />
+</div>

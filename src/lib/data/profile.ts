@@ -2,8 +2,8 @@
 // Edit here; every page reads from this module.
 
 export const profile = {
-  name: 'LimX',
-  role: 'Engineer + designer',
+  name: 'Hydrilla Salim',
+  role: 'Software Engineer',
   tagline: 'building for the web',
   location: 'TODO: City, Country',
   email: 'hello@example.com',

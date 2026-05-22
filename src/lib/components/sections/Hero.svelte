@@ -1,48 +1,55 @@
 <script lang="ts">
-  import Button from '$components/primitives/Button.svelte';
-  import Icon from '$components/primitives/Icon.svelte';
-  import Reveal from '$components/effects/Reveal.svelte';
   import { profile } from '$data/profile';
+  import Reveal from '$components/effects/Reveal.svelte';
+
+  const taglineLine =
+    profile.tagline.charAt(0).toUpperCase() + profile.tagline.slice(1) + '.';
 </script>
 
-<section id="top" class="relative overflow-hidden">
-  <div class="hero-glow" aria-hidden="true"></div>
+<section id="top">
+  <Reveal>
+    <div class="flex items-center gap-2">
+      <span class="dot-live"></span>
+      <span class="eyebrow">Available for new work</span>
+    </div>
+  </Reveal>
 
-  <div class="relative z-10 mx-auto w-full max-w-[var(--container-page)] px-6 pt-28 md:pt-40 pb-24 md:pb-36 text-center">
-    <Reveal delay={1} class="mt-6">
-      <h1
-        class="text-display text-[clamp(44px,7.5vw,96px)] leading-[1.02] tracking-[-0.035em] max-w-[14ch] mx-auto"
-      >
-        <span class="text-ink">{profile.name}</span>
-        <span class="block text-gradient-accent">{profile.tagline}</span>
-      </h1>
-    </Reveal>
+  <Reveal delay={1}>
+    <h1 class="display-1 mt-6">
+      {profile.role} &amp; designer.<br />
+      {taglineLine}
+    </h1>
+  </Reveal>
 
-    <Reveal delay={2} class="mt-7">
-      <p class="mx-auto max-w-[640px] text-[19px] leading-[1.5] text-ink-muted">
-        {profile.role}. TODO: one elevator-pitch line about the value you bring. Replace with your own.
-      </p>
-    </Reveal>
+  <Reveal delay={2}>
+    <p class="text-[18px] text-muted max-w-[560px] mt-6 leading-relaxed">
+      {profile.bio[0]}
+    </p>
+  </Reveal>
 
-    <Reveal delay={3} class="mt-10">
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        <Button href="#work" variant="primary" size="lg">
-          <span>See work</span>
-          <Icon name="arrow.right" scale="small" />
-        </Button>
-        <Button href="#contact" variant="secondary" size="lg">Get in touch</Button>
+  <Reveal delay={3}>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="#work" class="btn btn-primary">See selected work</a>
+      <a href="#contact" class="btn btn-secondary">Get in touch</a>
+    </div>
+  </Reveal>
+
+  <Reveal delay={4}>
+    <dl class="mt-16 pt-8 hairline grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div>
+        <dt class="eyebrow">Based in</dt>
+        <dd class="mt-2 text-fg">{profile.location}</dd>
       </div>
-    </Reveal>
-
-    <Reveal delay={5} class="mt-16">
-      <a
-        href="#about"
-        class="inline-flex flex-col items-center gap-2 text-ink-faint hover:text-ink transition"
-        aria-label="Scroll to about section"
-      >
-        <span class="text-[11px] uppercase tracking-[0.22em]">Scroll</span>
-        <span class="animate-bounce"><Icon name="arrow.down.circle" scale="large" /></span>
-      </a>
-    </Reveal>
-  </div>
+      <div>
+        <dt class="eyebrow">Currently</dt>
+        <dd class="mt-2 text-fg">Open to new work</dd>
+      </div>
+      <div>
+        <dt class="eyebrow">Email</dt>
+        <dd class="mt-2">
+          <a href="mailto:{profile.email}" class="link-accent">{profile.email}</a>
+        </dd>
+      </div>
+    </dl>
+  </Reveal>
 </section>

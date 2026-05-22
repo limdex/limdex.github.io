@@ -1,25 +1,28 @@
 <script lang="ts">
-  import Section from '$components/primitives/Section.svelte';
-  import Icon from '$components/primitives/Icon.svelte';
+  import { highlights } from '$data/highlights';
   import Reveal from '$components/effects/Reveal.svelte';
-  import { highlights } from '$data/projects';
+  import Icon from '$components/primitives/Icon.svelte';
 </script>
 
-<Section id="highlights" eyebrow="Capabilities" title="What I do" align="center">
-  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<section id="highlights">
+  <Reveal>
+    <div class="flex items-center gap-4 mb-12">
+      <span class="eyebrow">03 · What I do</span>
+      <span class="flex-1 h-px bg-line"></span>
+    </div>
+  </Reveal>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     {#each highlights as h, i}
-      <Reveal delay={i + 1}>
-        <div
-          class="relative flex flex-col items-start gap-3 p-6 rounded-[var(--radius-tile)] glass-card
-                 hover:border-accent/40 transition"
-        >
-          <span class="inline-flex items-center justify-center size-11 rounded-xl glass-tag-accent text-accent">
-            <Icon name={h.icon} scale="large" />
+      <Reveal delay={i}>
+        <div class="surface p-6 h-full flex flex-col gap-3 hover:border-line-strong transition-colors">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-md bg-accent-soft text-accent">
+            <Icon name={h.icon} scale="small" />
           </span>
-          <h3 class="text-[17px] font-semibold text-ink">{h.label}</h3>
-          <p class="text-[14px] text-ink-muted leading-[1.5]">{h.desc}</p>
+          <h3 class="text-[16px] font-medium text-fg mt-2">{h.label}</h3>
+          <p class="text-[14px] text-muted leading-relaxed">{h.desc}</p>
         </div>
       </Reveal>
     {/each}
   </div>
-</Section>
+</section>
